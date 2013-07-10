@@ -32,6 +32,6 @@ def main(global_config, **settings):
     # Routes
     config.add_route('index', '/')
 
-    config.scan('hadoukn.views')
+    config.scan('hadoukn.api')
 
     return config.make_wsgi_app()
