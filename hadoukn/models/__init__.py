@@ -18,3 +18,4 @@ Base = declarative_base(cls=BaseClass)
 
 def initialize_base(engine):
     Base.metadata.bind = engine
+    Base.metadata.create_all(engine)
