@@ -1,5 +1,6 @@
 from pyramid.view import forbidden_view_config
-from hadoukn.api import (
+
+from . import (
     api_exception_decorator_factory,
     BadRequest
 )

@@ -4,7 +4,8 @@ from sqlalchemy import (
     Integer,
     ForeignKey
 )
-from hadoukn.models import Base
+
+from .meta import Base
 
 
 class Logplex(Base):

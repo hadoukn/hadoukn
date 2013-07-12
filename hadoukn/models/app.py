@@ -4,11 +4,11 @@ from sqlalchemy import (
     Integer,
     ForeignKey
 )
-from hadoukn.models import Base
-from hadoukn.models.behaviors.createable import Createable
+from .meta import Base
+from .behaviors.createable import Createable
 
 
-class App(Base, Createable):
+class App(Createable, Base):
     __tablename__ = 'apps'
 
     # Main Fields

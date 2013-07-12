@@ -6,6 +6,16 @@ from setuptools import setup
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.md')).read()
 
+requires = [
+    'colander',
+    'pyramid',
+    'pyramid_tm',
+    'sqlalchemy',
+    'transaction',
+    'waitress',
+    'zope.sqlalchemy',
+]
+
 entry_points = """
     [paste.app_factory]
     main = hadoukn:main
