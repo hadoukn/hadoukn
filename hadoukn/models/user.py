@@ -1,12 +1,13 @@
+from hashlib import sha1
 import os
 
-from hashlib import sha1
 from sqlalchemy import (
     String,
     Column
 )
 from sqlalchemy.orm import relationship
-from hadoukn.models import Base
+
+from .meta import Base
 
 
 class User(Base):

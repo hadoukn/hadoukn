@@ -5,7 +5,8 @@ from sqlalchemy import (
     ForeignKey
 )
 from sqlalchemy.orm import relationship
-from hadoukn.models import Base
+
+from .meta import Base
 
 
 class Collaborator(Base):

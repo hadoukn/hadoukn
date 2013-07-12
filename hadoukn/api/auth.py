@@ -3,8 +3,8 @@ import base64
 from pyramid.view import view_config
 from pyramid.security import NO_PERMISSION_REQUIRED
 
-from hadoukn.models.user import User
-from hadoukn.api import api_exception_decorator_factory
+from ..models.user import User
+from . import api_exception_decorator_factory
 
 
 @view_config(route_name='login',

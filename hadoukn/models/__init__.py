@@ -1,21 +1,41 @@
-from sqlalchemy import (
-    Column,
-    Integer
-)
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import engine_from_config
+from sqlalchemy.orm import sessionmaker
+
+from zope.sqlalchemy import ZopeTransactionExtension
 
 
-class BaseClass(object):
-    id = Column(Integer, primary_key=True)
+def get_db(request):
+    maker = request.registry.dbmaker
+    session = maker()
 
-    @classmethod
-    def by_id(cls, db, _id):
-        return db.query(cls).filter_by(id=_id).first()
+    def cleanup(request):
+        session.close()
+    request.add_finished_callback(cleanup)
+
+    return session
 
 
-Base = declarative_base(cls=BaseClass)
+def includeme(config):
+    settings = config.registry.settings
 
+    engine = engine_from_config(settings, prefix='sqlalchemy.')
 
-def initialize_base(engine):
-    Base.metadata.bind = engine
+    config.registry.dbmaker = sessionmaker(
+        bind=engine,
+        extension=ZopeTransactionExtension(),
+    )
+    config.add_request_method(get_db, name='db', reify=True)
+
+    # pull in all of the models before initializing
+    #config.scan('.')
+    from .app import App
+    from .collaborator import Collaborator
+    from .key import Key
+    from .logplex import Logplex
+    from .release import Release
+    from .user import User
+
+    # FIXME: try to create missing tables here, should really be done in
+    # a separate script
+    from .meta import Base
     Base.metadata.create_all(engine)

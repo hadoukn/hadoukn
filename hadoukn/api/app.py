@@ -6,9 +6,10 @@ from colander import (
     String
 )
 from pyramid.view import view_config
-from hadoukn.models.app import App
-from hadoukn.models.collaborator import Collaborator
-from hadoukn.api import api_exception_decorator_factory
+
+from ..models.app import App
+from ..models.collaborator import Collaborator
+from . import api_exception_decorator_factory
 
 
 @view_config(route_name='apps',

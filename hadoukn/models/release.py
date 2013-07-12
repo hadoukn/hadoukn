@@ -4,11 +4,12 @@ from sqlalchemy import (
     Integer,
     ForeignKey
 )
-from hadoukn.models import Base
-from hadoukn.models.behaviors.createable import Createable
+
+from .meta import Base
+from .behaviors.createable import Createable
 
 
-class Release(Base, Createable):
+class Release(Createable, Base):
     __tablename__ = 'releases'
 
     # Main Fields
