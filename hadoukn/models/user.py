@@ -18,6 +18,7 @@ class User(Base):
 
     # Relationships
     apps = relationship('App', backref='user')
+    keys = relationship('Key', backref='user')
 
     def __init__(self, username, password, **kwargs):
         self.username = username
@@ -69,3 +70,10 @@ class User(Base):
     @classmethod
     def by_api_key(cls, db, api_key):
         return db.query(cls).filter_by(api_key=api_key).first()
+
+    def __json__(self, request):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'api_key': self.api_key
+        }

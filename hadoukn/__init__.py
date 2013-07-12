@@ -23,6 +23,7 @@ from hadoukn.models.collaborator import Collaborator
 from hadoukn.models.logplex import Logplex
 from hadoukn.models.release import Release
 from hadoukn.models.user import User
+from hadoukn.models.key import Key
 
 
 def main(global_config, **settings):
@@ -55,6 +56,15 @@ def main(global_config, **settings):
 
     # Apps
     config.add_route('apps', '/apps')
+
+    # User
+    config.add_route('users', '/users')
+
+    # Keys
+    config.add_route('keys', '/keys')
+
+    # Internal
+    config.add_route('internal_git_command', '/internal/{app_name}/gitaction')
 
     config.scan('hadoukn.api')
 

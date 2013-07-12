@@ -28,6 +28,7 @@ class App(Base, Createable):
 
     def __json__(self, request):
         return {
+            'id': self.id,
             'name': self.name,
             'stack': self.stack,
             'web_url': self.web_url,
