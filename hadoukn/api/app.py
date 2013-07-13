@@ -17,18 +17,13 @@ from . import api_exception_decorator_factory
              decorator=(api_exception_decorator_factory))
 def apps_create(request):
     db = request.db
-    settings = request.registry.settings
 
     schema = SchemaNode(Mapping(),
-                        SchemaNode(String(), name='name'),
-                        SchemaNode(String(), name='stack'))
+                        SchemaNode(String(), name='name'))
     payload = schema.deserialize(request.json)
 
     app = App(created=datetime.datetime.now(),
               name=payload['name'],
-              stack=payload['stack'],
-              web_url='http://%s.%s' % (payload['name'], settings['hadoukn.base_domain']),
-              git_url='git@%s:%s.git' % (settings['hadoukn.base_domain'], payload['name']),
               user=request.user)
     db.add(app)
 
