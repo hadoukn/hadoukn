@@ -17,3 +17,11 @@ class Logplex(Base):
 
     # Foreign Keys
     app_id = Column(Integer, ForeignKey('apps.id'))
+
+    def __json__(self, request):
+        return {
+            'id': self.id,
+            'channel': self.channel,
+            'source': self.source,
+            'app_id': self.app_id
+        }

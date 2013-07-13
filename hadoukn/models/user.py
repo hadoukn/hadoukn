@@ -8,9 +8,10 @@ from sqlalchemy import (
 from sqlalchemy.orm import relationship
 
 from .meta import Base
+from .behaviors.createable import Createable
 
 
-class User(Base):
+class User(Createable, Base):
     __tablename__ = 'users'
 
     username = Column(String(50))
@@ -75,6 +76,8 @@ class User(Base):
     def __json__(self, request):
         return {
             'id': self.id,
+            'created': self.created,
             'username': self.username,
+            'password': self.password,
             'api_key': self.api_key
         }

@@ -7,7 +7,7 @@ from .meta import Base
 from .behaviors.createable import Createable
 
 
-class Daemon(Base, Createable):
+class Daemon(Createable, Base):
     __tablename__ = 'daemons'
 
     host = Column(String(16))
@@ -15,6 +15,8 @@ class Daemon(Base, Createable):
 
     def __json__(self, request):
         return {
+            'id': self.id,
+            'created': self.created,
             'host': self.host,
             'port': self.port
         }

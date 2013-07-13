@@ -24,6 +24,7 @@ class App(Createable, Base):
     def __json__(self, request):
         return {
             'id': self.id,
+            'created': self.created,
             'name': self.name,
-            'found_id': self.founder_id
+            'founder_id': self.founder_id
         }

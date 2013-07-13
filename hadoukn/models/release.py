@@ -18,3 +18,12 @@ class Release(Createable, Base):
     # Foreign Keys
     app_id = Column(Integer, ForeignKey('apps.id'))
     user_id = Column(Integer, ForeignKey('users.id'))
+
+    def __json__(self, request):
+        return {
+            'id': self.id,
+            'created': self.created,
+            'tag': self.tag,
+            'app_id': self.app_id,
+            'user_id': self.user_id
+        }
