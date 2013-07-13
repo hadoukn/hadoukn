@@ -29,8 +29,8 @@ def includeme(config):
     # pull in all of the models before initializing
     #config.scan('.')
     from .app import App
-    from .collaborator import Collaborator
-    from .key import Key
+    from .daemon import Daemon
+    from .dyno import Dyno
     from .logplex import Logplex
     from .release import Release
     from .user import User

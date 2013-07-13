@@ -19,7 +19,7 @@ class User(Base):
 
     # Relationships
     apps = relationship('App', backref='user')
-    keys = relationship('Key', backref='user')
+    releases = relationship('Release', backref='user')
 
     def __init__(self, username, password, **kwargs):
         self.username = username

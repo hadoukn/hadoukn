@@ -8,7 +8,6 @@ from colander import (
 from pyramid.view import view_config
 
 from ..models.app import App
-from ..models.collaborator import Collaborator
 from . import api_exception_decorator_factory
 
 
@@ -31,10 +30,7 @@ def apps_create(request):
               web_url='http://%s.%s' % (payload['name'], settings['hadoukn.base_domain']),
               git_url='git@%s:%s.git' % (settings['hadoukn.base_domain'], payload['name']),
               user=request.user)
-
-    Collaborator(user=request.user,
-                 app=app)
-
     db.add(app)
+
     db.flush()
     return app
