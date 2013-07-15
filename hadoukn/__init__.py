@@ -13,6 +13,7 @@ def main(global_config, **settings):
 
     # User
     config.add_route('users', '/users')
+    config.add_route('user_by_key', '/users/key')
 
     # Keys
     config.add_route('keys', '/keys')

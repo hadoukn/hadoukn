@@ -7,6 +7,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import relationship
 from .meta import Base
 from .behaviors.createable import Createable
+from hadoukn.util import print_time
 
 
 class App(Createable, Base):
@@ -24,7 +25,7 @@ class App(Createable, Base):
     def __json__(self, request):
         return {
             'id': self.id,
-            'created': self.created,
+            'created': print_time(self.created),
             'name': self.name,
             'founder_id': self.founder_id
         }

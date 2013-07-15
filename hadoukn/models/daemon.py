@@ -5,6 +5,7 @@ from sqlalchemy import (
 )
 from .meta import Base
 from .behaviors.createable import Createable
+from hadoukn.util import print_time
 
 
 class Daemon(Createable, Base):
@@ -16,7 +17,7 @@ class Daemon(Createable, Base):
     def __json__(self, request):
         return {
             'id': self.id,
-            'created': self.created,
+            'created': print_time(self.created),
             'host': self.host,
             'port': self.port
         }

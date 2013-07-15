@@ -6,6 +6,7 @@ from sqlalchemy import (
 )
 from .meta import Base
 from .behaviors.createable import Createable
+from hadoukn.util import print_time
 
 
 class Dyno(Createable, Base):
@@ -21,7 +22,7 @@ class Dyno(Createable, Base):
     def __json__(self, request):
         return {
             'id': self.id,
-            'created': self.created,
+            'created': print_time(self.created),
             'container_hash': self.container_hash,
             'release_id': self.release_id,
             'daemon_id': self.daemon_id

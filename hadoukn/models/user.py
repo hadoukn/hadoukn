@@ -9,6 +9,7 @@ from sqlalchemy.orm import relationship
 
 from .meta import Base
 from .behaviors.createable import Createable
+from hadoukn.util import print_time
 
 
 class User(Createable, Base):
@@ -21,6 +22,7 @@ class User(Createable, Base):
     # Relationships
     apps = relationship('App', backref='user')
     releases = relationship('Release', backref='user')
+    keys = relationship('Key', backref='user')
 
     def __init__(self, username, password, **kwargs):
         self.username = username
@@ -73,10 +75,14 @@ class User(Createable, Base):
     def by_api_key(cls, db, api_key):
         return db.query(cls).filter_by(api_key=api_key).first()
 
+    @classmethod
+    def by_params(cls, db, params):
+        return db.query(cls).filter_by(**params).all()
+
     def __json__(self, request):
         return {
             'id': self.id,
-            'created': self.created,
+            'created': print_time(self.created),
             'username': self.username,
             'password': self.password,
             'api_key': self.api_key

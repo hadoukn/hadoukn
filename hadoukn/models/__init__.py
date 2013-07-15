@@ -31,6 +31,7 @@ def includeme(config):
     from .app import App
     from .daemon import Daemon
     from .dyno import Dyno
+    from .key import Key
     from .logplex import Logplex
     from .release import Release
     from .user import User
